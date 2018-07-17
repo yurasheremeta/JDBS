@@ -15,13 +15,20 @@ public class Program {
         conn = DriverManager.getConnection(dbURL, userName, password);
         System.out.println("Connecting: " + !conn.isClosed());
         Scanner scan = new Scanner(System.in);
-
         DB.Create_Tables();
         DB.alter_tables();
-
+        System.out.println("en - English");
+        System.out.println("ua - Українська");
+        String buff = "en";
+        String buff2 = "ua";
+        String menu = scan.next();
         while(true){
-
-            printMenu();
+            if(menu.equals(buff)){
+                printMenu();
+            }else if (menu.equals(buff2)){
+                printMenuUA();
+            }
+            //printMenu();
             String fromUser = scan.next();
             switch(fromUser){
                 case "1":
@@ -43,7 +50,6 @@ public class Program {
                     break;
                 case "7":
                     DB.selectCountryWithID();
-
                     break;
                 case "8":
                     DB.selectCityWithID();
@@ -63,7 +69,8 @@ public class Program {
                 case "13":
                     DB.updateInfoPerson();
                     break;
-                case "0":
+
+                case "e":
                     System.out.println("Goodbay");
                     conn.close();
                     return;
@@ -82,7 +89,28 @@ public class Program {
         System.out.println("8 - Output city by id");
         System.out.println("9 - Output person by id");
         System.out.println("10 - Output information about people in the same city");
-        System.out.println("11 - join Country_city");
+        System.out.println("11 - Output what cities are there in country");
+        System.out.println("12 - Output from what country and city is person ");
+        System.out.println("13 - Update person");
+        System.out.println("e - EXIT");
+    }
+    private static void printMenuUA(){
+        System.out.println("1 - Додати Країну");
+        System.out.println("2 - Додати місто");
+        System.out.println("3 - Додати людину");
+        System.out.println("4 - Вивети всю інформацію про країни");
+        System.out.println("5 - Вивети всю інформацію про міств");
+        System.out.println("5 - Вивети всю інформацію про людей");
+        System.out.println("6 - Вивети всю інформацію про людей");
+        System.out.println("7 - Вивести країну за певним id");
+        System.out.println("8 - Вивести місто за певним id");
+        System.out.println("9 - Вивести людину за певним id");
+        System.out.println("10 - Вивести інформацію про людей з одного міста");
+        System.out.println("11 - Показати інформацію про міста які входять до вказаної країни");
+        System.out.println("12 - Показати інформацію про місто та країну з якого є людина");
+        System.out.println("13 - Змінити інформацію про людину");
+        System.out.println("e - ВИХІД");
+
     }
 
     protected static void UpddateMenu(){
@@ -91,5 +119,12 @@ public class Program {
         System.out.println("3 - update age");
         System.out.println("4 - update hobby");
         System.out.println("5 - update all info ");
+    }
+    protected  static void UpdateMenuUA(){
+        System.out.println("1 - змінити ім'я");
+        System.out.println("2 - змінити прізвище");
+        System.out.println("3 - змінити вік");
+        System.out.println("4 - змінити хоббі");
+        System.out.println("5 - змінити всю інформацію");
     }
 }

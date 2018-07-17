@@ -263,10 +263,15 @@ public class DB  {
     }
     protected  static void updateInfoPerson() throws SQLException{
         Scanner scan = new Scanner(System.in);
-
-        Program.UpddateMenu();
+        String menu = scan.next();
+        String buff = "en";
+        String buff2 = "ua";
+        if(menu.equals(buff)){
+            Program.UpddateMenu();
+        }else if(menu.equals(buff2)){
+            Program.UpdateMenuUA();
+        }
         String fromUser = scan.next();
-
             switch(fromUser){
                 case "1":
                     String query = "update person set first_name = ? where id = ? ";
