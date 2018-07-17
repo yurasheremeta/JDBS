@@ -1,9 +1,8 @@
 package JDBC;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import com.sun.scenario.effect.impl.prism.PrReflectionPeer;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -240,6 +239,114 @@ public class DB  {
         city.forEach(System.out::println);
         rs.close();
         ps.close();
+    }
+    protected static void personWhichCityAndCountry() throws SQLException{
+        String query = "select p.id, p.first_name,p.last_name,p.city_id,c.city_name,c.country_id, co.country_name  from person p " +
+                "join city c on p.city_id = c.id " +
+                "join country co on c.country_id = co.id;";
+        PreparedStatement ps  = Program.conn.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        List<String> persons = new ArrayList<>();
+        while(rs.next()){
+            persons.add("id: "+rs.getInt("id")+"\t |" +
+                    "first_name: "+rs.getString("first_name")+"\t |" +
+                    "last_name: "+rs.getString("last_name")+"\t |" +
+                 //   "age: "+rs.getInt("age")+"\t |" +
+                    "country: "+rs.getInt("country_id")+"\t |"+
+                    "country_name "+rs.getString("country_name")+"\t |"+
+                    "city: "+ rs.getInt("city_id")+"\t |" +
+                    "city_name "+rs.getString("city_name")+"\t |" );
+        }
+        persons.forEach(System.out::println);
+        rs.close();
+        ps.close();
+    }
+    protected  static void updateInfoPerson() throws SQLException{
+        Scanner scan = new Scanner(System.in);
+
+        Program.UpddateMenu();
+        String fromUser = scan.next();
+
+            switch(fromUser){
+                case "1":
+                    String query = "update person set first_name = ? where id = ? ";
+                    PreparedStatement ps = Program.conn.prepareStatement(query);
+                    System.out.println("Input first name: ");
+                    String first_name = scan.next();
+                    System.out.println("What person you want to update: ");
+                    int id = scan.nextInt();
+                    ps.setString(1,first_name);
+                    ps.setInt(2,id);
+                    ps.executeUpdate();
+                    ps.close();
+                    break;
+                case "2":
+                    String update_lastName = "update person set last_name = ? where id = ? ";
+                    PreparedStatement pstm = Program.conn.prepareStatement(update_lastName);
+                    System.out.println("Input last name: ");
+                    String last_name = scan.next();
+                    System.out.println("What person you want to update: ");
+                    int id1 = scan.nextInt();
+                    pstm.setString(1,last_name);
+                    pstm.setInt(2,id1);
+                    pstm.executeUpdate();
+                    pstm.close();
+
+                    break;
+                case "3":
+                    String update_age = "update person set age = ? where id = ? ";
+                    PreparedStatement ps1 = Program.conn.prepareStatement(update_age);
+                    System.out.println("Input age: ");
+                    int age = scan.nextInt();
+                    System.out.println("What person you want to update: ");
+                    int id2 = scan.nextInt();
+                    ps1.setInt(1,age);
+                    ps1.setInt(2,id2);
+                    ps1.executeUpdate();
+                    ps1.close();
+                    break;
+                case "4":
+                    String update_hobby = "update person set hobby = ? where id = ? ";
+                    PreparedStatement ps2 = Program.conn.prepareStatement(update_hobby);
+                    System.out.println("Input hobby: ");
+                    String hobby = scan.next();
+                    System.out.println("What person you want to update: ");
+                    int id3 = scan.nextInt();
+                    ps2.setString(1,hobby);
+                    ps2.setInt(2,id3);
+                    ps2.executeUpdate();
+                    ps2.close();
+                    break;
+                case "5":
+                    String update_All = "update person set first_name = ?," +
+                            "last_name = ?," +
+                            "age = ?," +
+                            "hobby = ?" +
+                            "where id = ?;";
+                    PreparedStatement pstmt1 = Program.conn.prepareStatement(update_All);
+                    System.out.println("Input first_name: ");
+                    String first_name1 = scan.next();
+                    System.out.println("Input last_name: ");
+                    String last_name1 = scan.next();
+                    System.out.println("Input age: ");
+                    int age1 = scan.nextInt();
+                    System.out.println("Input hobby: ");
+                    String hobby1 = scan.next();
+                    System.out.println("What person you want to update: ");
+                    int id4 = scan.nextInt();
+                    pstmt1.setString(1,first_name1);
+                    pstmt1.setString(2,last_name1);
+                    pstmt1.setInt(3,age1);
+                    pstmt1.setString(4,hobby1);
+                    pstmt1.setInt(5,id4);
+                    pstmt1.executeUpdate();
+                    pstmt1.close();
+                    break;
+
+
+            }
+
+
     }
 
 }

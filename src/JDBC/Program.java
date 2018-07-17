@@ -11,6 +11,7 @@ public class Program {
         String dbURL = "jdbc:mysql://localhost:3306/human_db_2?useSSL=false";
         String userName = "root";
         String password = "root12345";
+
         conn = DriverManager.getConnection(dbURL, userName, password);
         System.out.println("Connecting: " + !conn.isClosed());
         Scanner scan = new Scanner(System.in);
@@ -56,6 +57,12 @@ public class Program {
                 case "11":
                     DB.cityFromContry();
                     break;
+                case "12":
+                    DB.personWhichCityAndCountry();
+                    break;
+                case "13":
+                    DB.updateInfoPerson();
+                    break;
                 case "0":
                     System.out.println("Goodbay");
                     conn.close();
@@ -76,5 +83,13 @@ public class Program {
         System.out.println("9 - Output person by id");
         System.out.println("10 - Output information about people in the same city");
         System.out.println("11 - join Country_city");
+    }
+
+    protected static void UpddateMenu(){
+        System.out.println("1 - update first name");
+        System.out.println("2 - update last name");
+        System.out.println("3 - update age");
+        System.out.println("4 - update hobby");
+        System.out.println("5 - update all info ");
     }
 }
