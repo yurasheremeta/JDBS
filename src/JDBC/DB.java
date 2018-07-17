@@ -1,8 +1,11 @@
 package JDBC;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class DB  {
@@ -103,5 +106,19 @@ public class DB  {
         ps.executeUpdate();
         ps.close();
         System.out.println(first_name+" is aded!");
+    }
+    protected static void selectCity() throws SQLException{
+        String query = "select *  from city";
+        PreparedStatement ps = Program.conn.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        List<String> cities  = new ArrayList<>();
+        while(rs.next()){
+            cities.add("id: "+rs.getInt("id")+"\t |" +
+                    "name: "+ rs.getString("city_name")+"\t |" +
+                    "country: "+ rs.getInt("country_id")+"\t |");
+        }
+        cities.forEach(System.out::println);
+        rs.close();
+        ps.close();
     }
 }

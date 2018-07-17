@@ -40,11 +40,8 @@ public class Program {
     private static void printMenu(){
         System.out.println("1 - Add country");
         System.out.println("2 - Add city");
-        System.out.println("21 - add Country_City");
         System.out.println("3 - Add person");
-        System.out.println("31 - Add person_city");
         System.out.println("4 - Output all information from city");
-        System.out.println("41 - Output all information from Country_city");
         System.out.println("5 - Output all information from country");
         System.out.println("6 - Output all information from person");
         System.out.println("7 - Output person by id");
