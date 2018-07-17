@@ -121,4 +121,125 @@ public class DB  {
         rs.close();
         ps.close();
     }
+    protected static void selectPerson()throws SQLException{
+        String query = "select * from person";
+        PreparedStatement ps = Program.conn.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        List<String> persons = new ArrayList<>();
+        while(rs.next()){
+            persons.add("id: "+rs.getInt("id")+"\t |" +
+                    "first_name: "+rs.getString("first_name")+"\t |" +
+                    "last_name: "+rs.getString("last_name")+"\t |" +
+                    "age: "+rs.getInt("age")+"\t |" +
+                    "hobby: "+rs.getString("hobby")+"\t |" +
+                    "city: "+ rs.getInt("city_id")+"\t |" );
+        }
+        persons.forEach(System.out::println);
+        rs.close();
+        ps.close();
+    }
+    protected static void selectCountry() throws SQLException{
+        String query = "select * from country";
+        PreparedStatement ps = Program.conn.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        List<String> country = new ArrayList<>();
+        while(rs.next()){
+            country.add("id: "+rs.getInt("id")+"\t |" +
+                    "name: "+rs.getString("country_name")+"\t |");
+        }
+        country.forEach(System.out::println);
+        rs.close();
+        ps.close();
+    }
+    protected static void selectPersonWithID() throws SQLException{
+        Scanner scan = new Scanner(System.in);
+        String query = "Select * from person where id = ?;";
+        PreparedStatement ps = Program.conn.prepareStatement(query);
+        System.out.println("Enter the id");
+        int id = scan.nextInt();
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        List<String> person = new ArrayList<>();
+        while(rs.next()){
+            person.add("id: "+rs.getInt("id")+"\t |" +
+                    "first_name: "+rs.getString("first_name")+"\t |" +
+                    "last_name"+rs.getString("last_name")+"\t |" +
+                    "age: "+rs.getInt("age")+"\t |" +
+                    "hobby: "+rs.getString("hobby")+"\t |" +
+                    "city: "+ rs.getString("city_id")+"\t |");
+        }
+        person.forEach(System.out::println);
+        rs.close();
+        ps.close();
+
+    }
+    protected static void selectCityWithID() throws SQLException{
+        Scanner scan = new Scanner(System.in);
+        String query = "Select * from city where id = ?;";
+        PreparedStatement ps = Program.conn.prepareStatement(query);
+        System.out.println("Enter id: ");
+        int id = scan.nextInt();
+        ps.setInt(1,id);
+        ResultSet rs = ps.executeQuery();
+        List<String> city = new ArrayList<>();
+        while(rs.next()){
+            city.add("id: "+rs.getInt("id")+"\t |" +
+                    "name: "+rs.getString("city_name")+"\t |" +
+                    "country:"+rs.getInt("country_id")+"\t |");
+        }
+        city.forEach(System.out::println);
+        rs.close();
+        ps.close();
+    }
+    protected static void selectCountryWithID() throws SQLException{
+        Scanner scan = new Scanner(System.in);
+        String query = "Select * from country where id = ?;";
+        PreparedStatement ps = Program.conn.prepareStatement(query);
+        System.out.println("Enter id: ");
+        int id = scan.nextInt();
+        ps.setInt( 1, id);
+        ResultSet rs = ps.executeQuery();
+        List<String> country = new ArrayList<>();
+        while(rs.next()){
+            country.add("id: "+rs.getInt("id")+"\t |" +
+                    "name: "+rs.getString("country_name")+"\t |");
+        }
+        country.forEach(System.out::println);
+        rs.close();
+        ps.close();
+    }
+    protected static void joinPersonCity() throws SQLException{
+        String query = "Select * from person p join city c on  p.city_id = c.id";
+        PreparedStatement ps = Program.conn.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        List<String> person = new ArrayList<>();
+        while(rs.next()){
+            person.add("id"+rs.getInt("id")+"\t |" +
+                    "first_name"+rs.getString("first_name")+"\t |" +
+                    "city_id"+rs.getInt("city_id")+"\t |" +
+                    "city_name: "+rs.getString("city_name")+"\t |");
+        }
+        person.forEach(System.out::println);
+        rs.close();
+        ps.close();
+    }
+    protected static void cityFromContry()throws SQLException{
+        Scanner scan = new Scanner(System.in);
+        String query = "select * from city where country_id = ?";
+        PreparedStatement ps = Program.conn.prepareStatement(query);
+        System.out.println("Enter the country_id: ");
+        int country_id = scan.nextInt();
+        ps.setInt(1,country_id);
+        ResultSet  rs = ps.executeQuery();
+        List<String> city  = new ArrayList<>();
+        while(rs.next()){
+            city.add("id: "+rs.getInt("id")+"\t |" +
+                    "city name: "+ rs.getString("city_name")+"\t |" +
+                    "country id"+rs.getInt("country_id")+"\t |");
+        }
+        city.forEach(System.out::println);
+        rs.close();
+        ps.close();
+    }
+
 }

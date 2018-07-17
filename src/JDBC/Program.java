@@ -31,8 +31,35 @@ public class Program {
                     break;
                 case "3":
                     DB.addHuman();
-                default:
+                    break;
+                case "4":
+                    DB.selectCountry();
+                    break;
+                case "5":
+                    DB.selectCity();
+                case "6":
+                    DB.selectPerson();
+                    break;
+                case "7":
+                    DB.selectCountryWithID();
+
+                    break;
+                case "8":
+                    DB.selectCityWithID();
+                    break;
+                case "9":
+                    DB.selectPersonWithID();
+                    break;
+                case "10":
+                    DB.joinPersonCity();
+                    break;
+                case "11":
+                    DB.cityFromContry();
+                    break;
+                case "0":
+                    System.out.println("Goodbay");
                     conn.close();
+                    return;
             }
         }
     }
@@ -41,12 +68,12 @@ public class Program {
         System.out.println("1 - Add country");
         System.out.println("2 - Add city");
         System.out.println("3 - Add person");
-        System.out.println("4 - Output all information from city");
-        System.out.println("5 - Output all information from country");
+        System.out.println("4 - Output all information from country");
+        System.out.println("5 - Output all information from city");
         System.out.println("6 - Output all information from person");
-        System.out.println("7 - Output person by id");
+        System.out.println("7 - Output country by id");
         System.out.println("8 - Output city by id");
-        System.out.println("9 - Output country by id");
+        System.out.println("9 - Output person by id");
         System.out.println("10 - Output information about people in the same city");
         System.out.println("11 - join Country_city");
     }
