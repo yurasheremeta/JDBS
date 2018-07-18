@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Program {
     static Connection conn;
     public static void main(String[] args) throws SQLException {
-        String dbURL = "jdbc:mysql://localhost:3306/human_db_2?useSSL=false";
+        String dbURL = "jdbc:mysql://localhost:3306/human_db_2?useSSL=false&useUnicode=true&characterEncoding=UTF-8";
         String userName = "root";
         String password = "root12345";
 
